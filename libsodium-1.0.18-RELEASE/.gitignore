@@ -28,8 +28,6 @@
 /obj/
 Build
 INSTALL
-Makefile
-Makefile.in
 Vagrantfile
 aclocal.m4
 android-toolchain
@@ -39,7 +37,6 @@ build
 compile
 confdefs.h
 config.*
-configure
 configure.lineno
 coverage.info
 depcomp
