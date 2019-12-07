@@ -1,4 +1,4 @@
-#! /bin/bash -e
+#! /bin/sh -e
 
 echo "This script will set up your MySQL DB with a localhost-only user and will install the AwakeMUD tables."
 
@@ -106,7 +106,7 @@ echo ""
 echo "If you have a DB and want to save it, enter anything except your MySQL root user's password."
 echo "Otherwise, enter your MySQL root user's password when prompted."
 
-mysql -u root -p < gen_temp.sql
+mysql -u root < gen_temp.sql
 
 rm gen_temp.sql
 
