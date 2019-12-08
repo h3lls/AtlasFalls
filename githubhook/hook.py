@@ -18,9 +18,10 @@ def on_pull_request(data):
     if data['action'] != 'merged' and data['action'] != 'closed':
 	branch = data['pull_request']['head']['ref']
         clone_url = data['repository']['git_url']
-	print("Branch: {0}".format(branch))
-	print("Clone URL: {0}".format(clone_url))
-        print(os.popen("./builddev.sh {0} {0}".format(clone_url, branch)).read())
+	#print("Branch: {0}".format(branch))
+	#print("Clone URL: {0}".format(clone_url))
+        #subprocess.Popen(['./builddev.sh', clone_url, branch], shell=True)
+        print(os.popen("./builddev.sh {0} {1}".format(clone_url, branch)).read())
     #print("Building for pull request: {0}".format(data))
 
 @webhook.hook("release")
