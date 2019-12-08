@@ -14,4 +14,4 @@
 	docker run -p 4000:4000 -v G:\Projects\AthensWell:/AtlasFalls -it atlasfalls "/dockerstartmud.sh"
 - Connect to your mud on localhost port 4000
 
-THIS DOES NOT PERSIST THE DATABASE
+THIS DOES NOT PERSIST THE DATABASE.
