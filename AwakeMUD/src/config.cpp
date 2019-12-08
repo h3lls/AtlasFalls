@@ -33,8 +33,8 @@ bool DISPLAY_HELPFUL_STRINGS_FOR_MOB_FUNCS = TRUE;
 
 const char *MENU =
   "\r\n"
-  "^YWelcome ^Cto ^BAwakened Worlds^n!\r\n"
-  "^R0^n) Exit from ^BAwakened Worlds^n.\r\n"
+  "^YWelcome ^Cto ^BAtlas Falls^n!\r\n"
+  "^R0^n) Exit from ^BAtlas Falls^n.\r\n"
   "^G1^n) Enter the game.\r\n"
   "^G2^n) Read the background story.\r\n"
   "^G3^n) Change password.\r\n"
@@ -45,7 +45,7 @@ const char *MENU =
 const char *QMENU =
   "\r\n"
   "Current options:\r\n"
-  "^R0^n) Exit from ^BAwakened Worlds^n.\r\n"
+  "^R0^n) Exit from ^BAtlas Falls^n.\r\n"
   "^G1^n) Delete this character.\r\n"
   "\r\n"
   "   Make your choice: ";
@@ -104,7 +104,7 @@ const char *GREETINGS =
   // "CE Community  || ||| |, ^W||.| | | ||^n| . ..| ^y*^n ||| || ..| | . ..||||.|*| ||||\r\n"
   // "---------------------------------------------------------------------------\r\n"
   "\r\n"
-  "What's your handle, chummer? ";
+  "What's your handle? ";
 
 const char *WELC_MESSG =
   "\r\n"
