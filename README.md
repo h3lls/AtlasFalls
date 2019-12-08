@@ -4,7 +4,7 @@
 
 - Install docker.
 - Open a terminal / command window.
-- Clone this repo to your favorite directory.
+- Clone this repo to your favorite directory
 - (Ensure unix LF style line endings when editing any files in your favorite editor.)
 - Run: docker build -t atlasfalls .
 - Wait
