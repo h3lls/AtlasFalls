@@ -108,7 +108,7 @@ const char *GREETINGS =
 
 const char *WELC_MESSG =
   "\r\n"
-  "Welcome to the future, 2064, the Sixth World to some, an Awakening to all.\r\n"
+  "Welcome to the future, 2064, the Sixth World to some, an Awakening to all .\r\n"
   "\r\n\r\n";
 
 const char *START_MESSG =
