@@ -2,7 +2,7 @@
 
 # Testing in docker
 
-- Install docker
+- Install docker.
 - Open a terminal / command window
 - Clone this repo to your favorite directory
 - (Ensure unix LF style line endings when editing any files in your favorite editor.)
@@ -14,4 +14,5 @@
 	docker run -p 4000:4000 -v G:\Projects\AthensWell:/AtlasFalls -it atlasfalls "/dockerstartmud.sh"
 - Connect to your mud on localhost port 4000
 
-THIS DOES NOT PERSIST THE DATABASE.
+
+*THIS DOES NOT PERSIST THE DATABASE.*
