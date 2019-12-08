@@ -1,9 +1,6 @@
 name: C/C++ CI
 
-on:
-  push:
-    paths:
-    - 'AwakeMUD/**'
+on: [push]
 
 jobs:
   build:
@@ -12,5 +9,5 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: make
-        working-directory: AwakeMUD
+        working-directory: ./AwakeMUD
         run: make
