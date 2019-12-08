@@ -7,7 +7,7 @@
 - Clone this repo to your favorite directory
 - (Ensure unix LF style line endings when editing any files in your favorite editor.)
 - Run: docker build -t atlasfalls .
-- Wait..
+- Wait...
 - Wait even more
 - (Windows) Open docker settings and click "Shared Drives" Share the drive that contains your code by ticking the checkbox for that drive.
 - To test your code (Example path that you shared from windows is G and should point to your source code): 
