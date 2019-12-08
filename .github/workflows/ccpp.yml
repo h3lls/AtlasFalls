@@ -1,8 +1,9 @@
 name: C/C++ CI
 
-on: [push]
-  paths:
-  - 'AwakeMUD/**'
+on:
+  push:
+    paths:
+    - 'AwakeMUD/**'
 
 jobs:
   build:
