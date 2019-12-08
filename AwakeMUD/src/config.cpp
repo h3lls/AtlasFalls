@@ -112,7 +112,7 @@ const char *WELC_MESSG =
   "\r\n\r\n";
 
 const char *START_MESSG =
-  "Welcome to the future, 2064, where humankind has entered what the Mayans would\r\n"
+  "Welcome to the future, 2064, where humankind has entered what the Mayans would \r\n"
   "call the Sixth World. You are entering a world of rampant corruption and twisted\r\n"
   "mechanisms of power, a place where corporations overrule nations and life is cheap.\r\n"
   "You have joined this world as a Shadowrunner, a person who works clandestine jobs\r\n"
