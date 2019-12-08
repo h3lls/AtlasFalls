@@ -10,7 +10,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - working-directory: AwakeMUD
       - uses: actions/checkout@v1
       - name: make
+        working-directory: AwakeMUD
         run: make
