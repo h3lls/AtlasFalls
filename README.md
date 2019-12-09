@@ -14,5 +14,7 @@
 	docker run -p 4000:4000 -v G:\Projects\AthensWell:/AtlasFalls -it atlasfalls "/dockerstartmud.sh"
 - Connect to your mud on localhost port 4000
 
+# New server install
+- Crontab entries:
 
 *THIS DOES NOT PERSIST THE DATABASE.*
