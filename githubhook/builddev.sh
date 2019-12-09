@@ -20,7 +20,11 @@ cd /build/AtlasFalls/AwakeMUD/src
 make
 
 rm -rf /AtlasFallsDev/AwakeMUD/bin/awakedev
+rm -rf /AtlasFallsDev/AwakeMUD/lib/
+rm -rf /AtlasFallsDev/AwakeMUD/doc/
 
 cp ../bin/awake /AtlasFallsDev/AwakeMUD/bin/awakedev
+cp -r ../lib/ /AtlasFallsDev/AwakeMUD/lib/
+cp -r ../doc/ /AtlasFallsDev/AwakeMUD/doc/
 
 pkill awakedev
