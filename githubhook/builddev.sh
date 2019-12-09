@@ -13,7 +13,6 @@ git checkout $2
 
 git pull
 
-# exit 1
 cp /AtlasFalls/githubhook/mysql_config.cpp.dev /build/AtlasFalls/AwakeMUD/src/mysql_config.cpp
 
 cd /build/AtlasFalls/AwakeMUD/src
