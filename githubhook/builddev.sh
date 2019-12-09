@@ -24,6 +24,6 @@ rm -rf /AtlasFallsDev/AwakeMUD/doc/
 
 mkdir -p /AtlasFallsDev/AwakeMUD/bin/ && cp ../bin/awake /AtlasFallsDev/AwakeMUD/bin/awakedev
 mkdir -p /AtlasFallsDev/AwakeMUD/lib/ && cp -r ../lib/ /AtlasFallsDev/AwakeMUD/lib/
-mkdir -p /AtlasFallsDev/AwakeMUD/doc/ cp -r ../doc/ /AtlasFallsDev/AwakeMUD/doc/
+mkdir -p /AtlasFallsDev/AwakeMUD/doc/ && cp -r ../doc/ /AtlasFallsDev/AwakeMUD/doc/
 
 pkill awakedev
