@@ -16,18 +16,14 @@ def on_push(data):
 @webhook.hook("pull_request")
 def on_pull_request(data):
     if data['action'] != 'merged' and data['action'] != 'closed':
-	branch = data['pull_request']['head']['ref']
+        branch = data['pull_request']['head']['ref']
         clone_url = data['repository']['git_url']
-	#print("Branch: {0}".format(branch))
-	#print("Clone URL: {0}".format(clone_url))
-        #subprocess.Popen(['./builddev.sh', clone_url, branch], shell=True)
         print(os.popen("./builddev.sh {0} {1}".format(clone_url, branch)).read())
-    #print("Building for pull request: {0}".format(data))
 
 @webhook.hook("release")
 def on_release(data):
     if data['action'] == 'published':
-	print("Building for prod release for: {0}".format(data))
+        print("Building for prod release for: {0}".format(data))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8900)
