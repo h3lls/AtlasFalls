@@ -21,66 +21,64 @@ message_queue = asyncio.Queue()
 
 client = discord.Client()
 
-def strip_colors(text):
-	return re.sub(r'\\x1b.....m', '', text.decode('utf-8', 'backslashreplace'))
-
 def telnet(client):
-	pool = concurrent.futures.ThreadPoolExecutor()
-	channel = None
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.settimeout(2)
+    pool = concurrent.futures.ThreadPoolExecutor()
+    channel = None
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(2)
 
-	# connect to remote host
-	try :
-		s.connect((mud_host, mud_port))
-	except :
-		print('Unable to connect')
-		sys.exit()
+    # connect to remote host
+    try :
+        s.connect((mud_host, mud_port))
+    except :
+        print('Unable to connect')
+        sys.exit()
 
-	print('Connected to remote host')
+    print('Connected to remote host')
 
-	while 1:
-		socket_list = [sys.stdin, s]
-		
-		# Get the list sockets which are readable
-		read_sockets, write_sockets, error_sockets = select.select(socket_list , [], [])
-		
-		for sock in read_sockets:
-			#incoming message from remote server
-			if sock == s:
-				data = sock.recv(4096)
-				if not data:
-					print('Connection closed')
-					sys.exit()
-				else:
-					cleaned_text = strip_colors(data)
-					# This is clearly unsafe.. I know this... it's fine... just fine
-
-					if "your handle" in cleaned_text:
-						print("your handle")
-						s.send((mud_username + "\n").encode())
-					elif "Welcome back. Enter your password" in cleaned_text:
-						s.send((mud_password + "\n").encode())
-					else:# "(OOC)" in cleaned_text:
-						print("sending: " + cleaned_text)
-						message_queue.put_nowait(cleaned_text)
-						# await channel.send(cleaned_text)
-					print(cleaned_text)
-			
-			#user entered a message
-			else :
-				msg = sys.stdin.readline()
-				s.send(msg.encode())
+    while 1:
+        socket_list = [sys.stdin, s]
+        
+        # Get the list sockets which are readable
+        read_sockets, write_sockets, error_sockets = select.select(socket_list , [], [])
+        
+        for sock in read_sockets:
+            #incoming message from remote server
+            if sock == s:
+                data = sock.recv(4096)
+                if not data:
+                    print('Connection closed')
+                    sys.exit()
+                else:
+                    data = data.decode('utf-8', 'backslashreplace')
+                    # This is clearly unsafe.. I know this... it's fine... just fine
+                    if "your handle" in data:
+                        print("your handle")
+                        s.send((mud_username + "\n").encode())
+                    elif "Welcome back. Enter your password" in data:
+                        s.send((mud_password + "\n").encode())
+                    elif "PRESS RETURN" in data:
+                        s.send("\n".encode())
+                    elif "Enter the game" in data:
+                        s.send("1\n".encode())
+                    elif "(OOC)" in data:
+                        data = data.strip()
+                        send_text = "**" + data[1:].split(']')[0] + "**: " + data[data.find('"')+1:-1]
+                        print("sending: " + send_text)
+                        message_queue.put_nowait(send_text)
+            else :
+                msg = sys.stdin.readline()
+                s.send(msg.encode())
 
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
     channel = client.get_channel(discord_channel)
     for guild in client.guilds:
-	    print(
-        	f'{client.user} is connected to the following guild:\n'
-	        f'{guild.name}(id: {guild.id})'
-	    )
+        print(
+            f'{client.user} is connected to the following guild:\n'
+            f'{guild.name}(id: {guild.id})'
+        )
     while True:
         message = await message_queue.get()
         try:
@@ -90,12 +88,6 @@ async def on_ready():
 
 x = threading.Thread(target=telnet, args=(client,))
 x.start()
-
-
-#telnet(None)
-# loop = asyncio.get_event_loop()
-# loop.run_until_complete(telnet(client))
-
 
 client.run(token)
 
