@@ -2,6 +2,7 @@
 import socket, select, string, sys
 import os
 import threading
+import time
 import re
 import asyncio, concurrent.futures
 
@@ -20,11 +21,11 @@ mud_port = int(os.getenv('MUD_PORT'))
 message_queue = asyncio.Queue()
 
 client = discord.Client()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def telnet(client):
     pool = concurrent.futures.ThreadPoolExecutor()
     channel = None
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.settimeout(2)
 
     # connect to remote host
@@ -37,6 +38,7 @@ def telnet(client):
     print('Connected to remote host')
 
     while 1:
+        time.sleep(1)
         socket_list = [sys.stdin, s]
         
         # Get the list sockets which are readable
@@ -63,12 +65,26 @@ def telnet(client):
                         s.send("1\n".encode())
                     elif "(OOC)" in data:
                         data = data.strip()
-                        send_text = "**" + data[1:].split(']')[0] + "**: " + data[data.find('"')+1:-1]
-                        print("sending: " + send_text)
-                        message_queue.put_nowait(send_text)
+                        user = data[1:].split(']')[0]
+                        if user.lower() != mud_username.lower():
+                            send_text = "**" + user + "**: " + data[data.find('"')+1:-1]
+                            print("sending to discord: " + send_text)
+                            message_queue.put_nowait(send_text)
             else :
                 msg = sys.stdin.readline()
                 s.send(msg.encode())
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.channel.id != discord_channel:
+        return
+    send_text = "ooc Discord: " + message.author.display_name + " says " + message.content + "\n"
+    print("sending to mud: " + send_text)
+    s.send(send_text.encode())
+    # message.content
+    # message.author.display_name
 
 @client.event
 async def on_ready():
@@ -80,6 +96,7 @@ async def on_ready():
             f'{guild.name}(id: {guild.id})'
         )
     while True:
+        time.sleep(1)
         message = await message_queue.get()
         try:
             await channel.send(message)
