@@ -2,6 +2,7 @@
 import socket, select, string, sys
 import os
 import threading
+import time
 import re
 import asyncio, concurrent.futures
 
@@ -23,15 +24,12 @@ getting_who = False
 message_queue = asyncio.Queue()
 
 client = discord.Client()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def telnet(client):
     pool = concurrent.futures.ThreadPoolExecutor()
     channel = None
-<<<<<<< Updated upstream
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-=======
     global getting_who, logged_in
->>>>>>> Stashed changes
     s.settimeout(2)
 
     # connect to remote host
@@ -44,6 +42,7 @@ def telnet(client):
     print('Connected to remote host')
 
     while 1:
+        time.sleep(1)
         socket_list = [sys.stdin, s]
         
         # Get the list sockets which are readable
@@ -92,21 +91,11 @@ def telnet(client):
                         s.send("\n".encode())
                     elif "Enter the game" in data:
                         s.send("1\n".encode())
-<<<<<<< Updated upstream
-                    elif "(OOC)" in data:
-                        data = data.strip()
-                        send_text = "**" + data[1:].split(']')[0] + "**: " + data[data.find('"')+1:-1]
-                        print("sending: " + send_text)
-                        message_queue.put_nowait(send_text)
-=======
->>>>>>> Stashed changes
             else :
                 msg = sys.stdin.readline()
                 s.send(msg.encode())
 
 @client.event
-<<<<<<< Updated upstream
-=======
 async def on_message(message):
     global getting_who
     if message.author == client.user:
@@ -125,7 +114,6 @@ async def on_message(message):
     # message.author.display_name
 
 @client.event
->>>>>>> Stashed changes
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
     channel = client.get_channel(discord_channel)
@@ -135,6 +123,7 @@ async def on_ready():
             f'{guild.name}(id: {guild.id})'
         )
     while True:
+        time.sleep(1)
         message = await message_queue.get()
         try:
             await channel.send(message)
